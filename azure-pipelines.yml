@@ -50,6 +50,13 @@ stages:
 
     - script: dotnet test
       displayName: 'Run tests'
+    
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
 
     - publish: $(Build.ArtifactStagingDirectory)
       artifact: drop
