@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{066CD26A-34CC-42B9-9C90-2725AC84649B}|VamsiWebApplication\\VamsiWebApplication.csproj|c:\\users\\vloya1\\desktop\\vamsiwebapplication\\vamsiwebapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{066CD26A-34CC-42B9-9C90-2725AC84649B}|VamsiWebApplication\\VamsiWebApplication.csproj|solutionrelative:vamsiwebapplication\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4944964-8578-4DE7-B1BF-8DEB87A8CB09}|TestWebApp\\TestWebApp.csproj|c:\\users\\vloya1\\desktop\\vamsiwebapplication\\testwebapp\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4944964-8578-4DE7-B1BF-8DEB87A8CB09}|TestWebApp\\TestWebApp.csproj|solutionrelative:testwebapp\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{066CD26A-34CC-42B9-9C90-2725AC84649B}|VamsiWebApplication\\VamsiWebApplication.csproj|c:\\users\\vloya1\\desktop\\vamsiwebapplication\\vamsiwebapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{066CD26A-34CC-42B9-9C90-2725AC84649B}|VamsiWebApplication\\VamsiWebApplication.csproj|solutionrelative:vamsiwebapplication\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{066CD26A-34CC-42B9-9C90-2725AC84649B}|VamsiWebApplication\\VamsiWebApplication.csproj|c:\\users\\vloya1\\desktop\\vamsiwebapplication\\vamsiwebapplication\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{066CD26A-34CC-42B9-9C90-2725AC84649B}|VamsiWebApplication\\VamsiWebApplication.csproj|solutionrelative:vamsiwebapplication\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\TestWebApp\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "TestWebApp\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\TestWebApp\\UnitTest1.cs",
+              "RelativeToolTip": "TestWebApp\\UnitTest1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T22:40:05.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\VamsiWebApplication\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "VamsiWebApplication\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\VamsiWebApplication\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "VamsiWebApplication\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAADKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-27T22:29:54.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\VamsiWebApplication\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "VamsiWebApplication\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\VamsiWebApplication\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "VamsiWebApplication\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T22:27:17.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\VamsiWebApplication\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "VamsiWebApplication\\Models\\Student.cs",
+              "ToolTip": "C:\\Users\\vloya1\\Desktop\\VamsiWebApplication\\VamsiWebApplication\\Models\\Student.cs",
+              "RelativeToolTip": "VamsiWebApplication\\Models\\Student.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T22:25:28.187Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
