@@ -43,7 +43,7 @@ stages:
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'
-        version: '8.0.303' # Use the appropriate .NET Core version
+        version: '8.0.303'
 
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Build solution'
