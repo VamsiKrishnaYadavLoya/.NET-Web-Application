@@ -75,6 +75,11 @@ stages:
           - download: current
             artifact: drop
 
+          - script: |
+              echo "Listing contents of $(System.DefaultWorkingDirectory)/drop"
+              ls -R $(System.DefaultWorkingDirectory)/drop
+            displayName: 'List contents after download'
+
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(azureServiceConnection)
@@ -96,6 +101,11 @@ stages:
           steps:
           - download: current
             artifact: drop
+
+          - script: |
+              echo "Listing contents of $(System.DefaultWorkingDirectory)/drop"
+              ls -R $(System.DefaultWorkingDirectory)/drop
+            displayName: 'List contents after download'
 
           - task: AzureWebApp@1
             inputs:
