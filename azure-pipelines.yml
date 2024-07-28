@@ -1,0 +1,115 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  stagingAppName: 'Staging-Environment'
+  productionAppName: 'Production-Environment'
+  azureServiceConnection: 'WebAppDeployment'
+  stagingResourceGroup: 'Staging-Environment_group'
+  productionResourceGroup: 'Production-Environment_group'
+  location: 'East US'
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(solution)'
+
+    - task: VSBuild@1
+      inputs:
+        solution: '$(solution)'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\VamsiWebApplication.zip" /p:DeployIisAppPath="Default Web Site"'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+
+    - task: VSTest@2
+      inputs:
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.303'
+
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'Build solution'
+
+    - script: dotnet test
+      displayName: 'Run tests'
+    
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/VamsiWebApplication'
+        zipAfterPublish: true
+
+    - publish: $(Build.ArtifactStagingDirectory)/VamsiWebApplication
+      artifact: drop
+
+- stage: Deploy_Staging
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    environment: 'staging'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - script: |
+              echo "Listing contents after download"
+              ls -R $(Pipeline.Workspace)/drop
+            displayName: 'List contents after download'
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              appType: 'webApp'
+              appName: $(stagingAppName)
+              package: $(Pipeline.Workspace)/drop/VamsiWebApplication.zip
+
+- stage: Deploy_Production
+  dependsOn: Deploy_Staging
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    environment: 'production'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - script: |
+              echo "Listing contents after download"
+              ls -R $(Pipeline.Workspace)/drop
+            displayName: 'List contents after download'
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              appType: 'webApp'
+              appName: $(productionAppName)
+              package: $(Pipeline.Workspace)/drop/VamsiWebApplication.zip
