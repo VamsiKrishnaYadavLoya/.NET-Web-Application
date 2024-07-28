@@ -44,3 +44,4 @@ Application Insights:
 
 dotnet add package Microsoft.ApplicationInsights.AspNetCore
 * Update "Program.cs" to include Application Insights.
+last
