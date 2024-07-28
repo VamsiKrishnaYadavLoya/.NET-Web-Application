@@ -80,6 +80,16 @@ stages:
               ls -R $(Pipeline.Workspace)/drop
             displayName: 'List contents after download'
 
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              azureResourceManagerConnection: '$(azureServiceConnection)'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: '$(stagingResourceGroup)'
+              location: '$(location)'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(System.DefaultWorkingDirectory)/templates/webapp-template.json'
+              csmParametersFile: '$(System.DefaultWorkingDirectory)/templates/webapp-parameters.json'
+
           - task: AzureWebApp@1
             inputs:
               azureSubscription: $(azureServiceConnection)
@@ -106,6 +116,16 @@ stages:
               echo "Listing contents after download"
               ls -R $(Pipeline.Workspace)/drop
             displayName: 'List contents after download'
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              azureResourceManagerConnection: '$(azureServiceConnection)'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: '$(productionResourceGroup)'
+              location: '$(location)'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(System.DefaultWorkingDirectory)/templates/webapp-template.json'
+              csmParametersFile: '$(System.DefaultWorkingDirectory)/templates/webapp-parameters.json'
 
           - task: AzureWebApp@1
             inputs:
