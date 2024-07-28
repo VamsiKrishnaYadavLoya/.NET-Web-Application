@@ -8,6 +8,12 @@ builder.Services.AddControllersWithViews();
 // Add Application Insights telemetry
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["ApplicationInsights:InstrumentationKey"]);
 
+// Configuring Logs
+builder.Logging.AddApplicationInsights(
+    configureTelemetryConfiguration: (config) => config.ConnectionString = builder.Configuration["ApplicationInsights:InstrumentationKey"],
+    configureApplicationInsightsLoggerOptions: (options) => { }
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
