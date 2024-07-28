@@ -111,7 +111,6 @@ stages:
               azureResourceManagerConnection: 'ARMService'
               deploymentScope: 'Resource Group'
               subscriptionId: 'ba1fd07b-58e0-444e-bd6c-162686d63a10'
-              location: 'East US'
               azureSubscription: '$(azureServiceConnection)'
               resourceGroupName: '$(productionResourceGroup)'
               location: '$(location)'
