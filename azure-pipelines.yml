@@ -48,7 +48,7 @@ stages:
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Build solution'
 
-    - script: dotnet test --no-build --verbosity normal
+    - script: dotnet test
       displayName: 'Running Unit Tests'
     
     - task: DotNetCoreCLI@2
