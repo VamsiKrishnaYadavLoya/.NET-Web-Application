@@ -31,7 +31,7 @@ stages:
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\VamsiWebApplication.zip" /p:DeployIisAppPath="Default Web Site"'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
 
@@ -43,7 +43,7 @@ stages:
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'
-        version: '8.0.303' # Adjust to the latest version if necessary
+        version: '8.0.303'
 
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Build solution'
@@ -55,10 +55,10 @@ stages:
       inputs:
         command: 'publish'
         publishWebProjects: true
-        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/VamsiWebApplication'
         zipAfterPublish: true
 
-    - publish: $(Build.ArtifactStagingDirectory)
+    - publish: $(Build.ArtifactStagingDirectory)/VamsiWebApplication
       artifact: drop
 
 - stage: Deploy_Staging
@@ -80,7 +80,7 @@ stages:
               azureSubscription: $(azureServiceConnection)
               appType: 'webApp'
               appName: $(stagingAppName)
-              package: $(System.DefaultWorkingDirectory)/drop/WebApp.zip
+              package: $(System.DefaultWorkingDirectory)/drop/VamsiWebApplication.zip
 
 - stage: Deploy_Production
   dependsOn: Deploy_Staging
@@ -102,4 +102,4 @@ stages:
               azureSubscription: $(azureServiceConnection)
               appType: 'webApp'
               appName: $(productionAppName)
-              package: $(System.DefaultWorkingDirectory)/drop/WebApp.zip
+              package: $(System.DefaultWorkingDirectory)/drop/VamsiWebApplication.zip
