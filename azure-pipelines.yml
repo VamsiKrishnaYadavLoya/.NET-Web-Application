@@ -7,7 +7,7 @@ variables:
   buildConfiguration: 'Release'
   stagingAppName: 'Staging-Environment'
   productionAppName: 'Production-Environment'
-  azureServiceConnection: 'WebAppDeployment'
+  azureServiceConnection: 'ARMService' # Consistent use of service connection name
   stagingResourceGroup: 'Staging-Environment_group'
   productionResourceGroup: 'Production-Environment_group'
   location: 'East US'
@@ -79,7 +79,7 @@ stages:
 
           - task: AzureResourceManagerTemplateDeployment@3
             inputs:
-              azureSubscription: '$(azureServiceConnection)'
+              azureResourceManagerConnection: '$(azureServiceConnection)'
               resourceGroupName: '$(stagingResourceGroup)'
               location: '$(location)'
               templateLocation: 'Linked artifact'
@@ -108,10 +108,7 @@ stages:
 
           - task: AzureResourceManagerTemplateDeployment@3
             inputs:
-              azureResourceManagerConnection: 'ARMService'
-              deploymentScope: 'Resource Group'
-              subscriptionId: 'ba1fd07b-58e0-444e-bd6c-162686d63a10'
-              azureSubscription: '$(azureServiceConnection)'
+              azureResourceManagerConnection: '$(azureServiceConnection)'
               resourceGroupName: '$(productionResourceGroup)'
               location: '$(location)'
               templateLocation: 'Linked artifact'
