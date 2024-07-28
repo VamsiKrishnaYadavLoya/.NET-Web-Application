@@ -77,7 +77,7 @@ stages:
 
           - script: |
               echo "Listing contents after download"
-              ls -R D:\a\1\drop
+              ls -R $(Pipeline.Workspace)/drop
             displayName: 'List contents after download'
 
           - task: AzureWebApp@1
@@ -85,7 +85,7 @@ stages:
               azureSubscription: $(azureServiceConnection)
               appType: 'webApp'
               appName: $(stagingAppName)
-              package: $(System.DefaultWorkingDirectory)/drop/VamsiWebApplication.zip
+              package: $(Pipeline.Workspace)/drop/VamsiWebApplication.zip
 
 - stage: Deploy_Production
   dependsOn: Deploy_Staging
@@ -104,7 +104,7 @@ stages:
 
           - script: |
               echo "Listing contents after download"
-              ls -R D:\a\1\drop
+              ls -R $(Pipeline.Workspace)/drop
             displayName: 'List contents after download'
 
           - task: AzureWebApp@1
@@ -112,4 +112,4 @@ stages:
               azureSubscription: $(azureServiceConnection)
               appType: 'webApp'
               appName: $(productionAppName)
-              package: $(System.DefaultWorkingDirectory)/drop/VamsiWebApplication.zip
+              package: $(Pipeline.Workspace)/drop/VamsiWebApplication.zip
