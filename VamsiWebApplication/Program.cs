@@ -1,7 +1,12 @@
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add Application Insights telemetry
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["ApplicationInsights:InstrumentationKey"]);
 
 var app = builder.Build();
 

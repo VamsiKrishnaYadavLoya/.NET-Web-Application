@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VamsiWebApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b4c12840a151fada2347388ca2b4d1614468375")]
 [assembly: System.Reflection.AssemblyProductAttribute("VamsiWebApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VamsiWebApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
