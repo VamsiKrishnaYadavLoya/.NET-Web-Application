@@ -114,4 +114,4 @@ stages:
               location: '$(location)'
               templateLocation: 'Linked artifact'
               csmFile: '$(Pipeline.Workspace)/drop/templates/webapp-template.json'
-              csmParametersFile: '$(Pipeline.Workspace)/drop/templates/webapp-parameters.json'
+              csmParametersFile: '$(Pipeline.Workspace)/drop/templates/webapp-parameters-production.json'
