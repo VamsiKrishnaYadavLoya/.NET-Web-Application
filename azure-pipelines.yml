@@ -56,6 +56,11 @@ stages:
         arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/VamsiWebApplication'
         zipAfterPublish: true
 
+    - task: CopyFiles@2
+      inputs:
+        contents: 'templates/**'
+        targetFolder: '$(Build.ArtifactStagingDirectory)/templates'
+
     - publish: $(Build.ArtifactStagingDirectory)/VamsiWebApplication
       artifact: drop
 
