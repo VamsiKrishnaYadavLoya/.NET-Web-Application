@@ -1,3 +1,6 @@
+trigger:
+- master
+
 pool:
   vmImage: 'windows-latest'
 
@@ -79,12 +82,20 @@ stages:
 
           - task: AzureResourceManagerTemplateDeployment@3
             inputs:
-              azureSubscription: '$(azureServiceConnection)'
+              azureResourceManagerConnection: '$(azureServiceConnection)'
+              action: 'Create Or Update Resource Group'
               resourceGroupName: '$(stagingResourceGroup)'
               location: '$(location)'
               templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/drop/templates/webapp-template.json'
-              csmParametersFile: '$(Pipeline.Workspace)/drop/templates/webapp-parameters.json'
+              csmFile: '$(System.DefaultWorkingDirectory)/drop/templates/webapp-template.json'
+              csmParametersFile: '$(System.DefaultWorkingDirectory)/drop/templates/webapp-parameters.json'
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              appType: 'webApp'
+              appName: $(stagingAppName)
+              package: $(Pipeline.Workspace)/drop/VamsiWebApplication.zip
 
 - stage: Deploy_Production
   dependsOn: Deploy_Staging
@@ -108,9 +119,17 @@ stages:
 
           - task: AzureResourceManagerTemplateDeployment@3
             inputs:
-              azureSubscription: '$(azureServiceConnection)'
+              azureResourceManagerConnection: '$(azureServiceConnection)'
+              action: 'Create Or Update Resource Group'
               resourceGroupName: '$(productionResourceGroup)'
               location: '$(location)'
               templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/drop/templates/webapp-template.json'
-              csmParametersFile: '$(Pipeline.Workspace)/drop/templates/webapp-parameters.json'
+              csmFile: '$(System.DefaultWorkingDirectory)/templates/webapp-template.json'
+              csmParametersFile: '$(System.DefaultWorkingDirectory)/templates/webapp-parameters.json'
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              appType: 'webApp'
+              appName: $(productionAppName)
+              package: $(Pipeline.Workspace)/drop/VamsiWebApplication.zip
