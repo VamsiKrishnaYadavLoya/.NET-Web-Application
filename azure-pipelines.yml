@@ -9,6 +9,8 @@ variables:
   productionAppName: 'Production-Environment'
   stagingServiceConnection: 'ARMService-Staging'
   productionServiceConnection: 'ARMService'
+  stagingResourceGroup: 'Staging-Environment_group'
+  productionResourceGroup: 'Production-Environment_group'
   location: 'East US'
 
 stages:
@@ -54,38 +56,67 @@ stages:
         arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/VamsiWebApplication'
         zipAfterPublish: true
 
+    - task: CopyFiles@2
+      inputs:
+        contents: 'templates/**'
+        targetFolder: '$(Build.ArtifactStagingDirectory)/templates'
+
     - publish: $(Build.ArtifactStagingDirectory)/VamsiWebApplication
       artifact: drop
 
 - stage: Deploy_Staging
   dependsOn: Build
   jobs:
-  - job: Deploy
+  - deployment: Deploy
+    environment: 'staging'
     pool:
       vmImage: 'windows-latest'
-    steps:
-    - download: current
-      artifact: drop
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
 
-    - script: |
-        echo "Deploying to staging environment"
-        # Add your deployment commands here, e.g., using Azure CLI or other deployment tools
-        echo "Deployment commands for staging"
-      displayName: 'Deploy to Staging'
+          - script: |
+              echo "Listing contents after download"
+              ls -R $(Pipeline.Workspace)/drop
+            displayName: 'List contents after download'
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              azureResourceManagerConnection: '$(stagingServiceConnection)'
+              resourceGroupName: '$(stagingResourceGroup)'
+              location: '$(location)'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Pipeline.Workspace)/drop/templates/webapp-template.json'
+              csmParametersFile: '$(Pipeline.Workspace)/drop/templates/webapp-parameters.json'
 
 - stage: Deploy_Production
   dependsOn: Deploy_Staging
   condition: succeeded()
   jobs:
-  - job: Deploy
+  - deployment: Deploy
+    environment: 'production'
     pool:
       vmImage: 'windows-latest'
-    steps:
-    - download: current
-      artifact: drop
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
 
-    - script: |
-        echo "Deploying to production environment"
-        # Add your deployment commands here, e.g., using Azure CLI or other deployment tools
-        echo "Deployment commands for production"
-      displayName: 'Deploy to Production'
+          - script: |
+              echo "Listing contents after download"
+              ls -R $(Pipeline.Workspace)/drop
+            displayName: 'List contents after download'
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              azureResourceManagerConnection: '$(productionServiceConnection)'
+              resourceGroupName: '$(productionResourceGroup)'
+              location: '$(location)'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Pipeline.Workspace)/drop/templates/webapp-template.json'
+              csmParametersFile: '$(Pipeline.Workspace)/drop/templates/webapp-parameters-production.json'
