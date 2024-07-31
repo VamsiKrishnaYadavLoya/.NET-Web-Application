@@ -25,3 +25,7 @@ Staging Environment
 * Verification: Ensures the application is running correctly in staging.
 Production Environment
 * Deploy to Production: Deploys the application to the production environment if staging deployment succeeds.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.

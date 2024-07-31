@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VamsiWebApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34a2b3525b2c1556166ddf49cf8f5a14d951b8d6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77185eea3974d13082b2c7a93e0ca8060f4007ea")]
 [assembly: System.Reflection.AssemblyProductAttribute("VamsiWebApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VamsiWebApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
